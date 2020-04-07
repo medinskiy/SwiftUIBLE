@@ -7,23 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		444C59F02426CB9F0073599D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C59EF2426CB9F0073599D /* AppDelegate.swift */; };
+		44127811243A97F60042CCE7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44127810243A97F60042CCE7 /* Item.swift */; };
 		444C59F22426CB9F0073599D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C59F12426CB9F0073599D /* SceneDelegate.swift */; };
 		444C59F42426CB9F0073599D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C59F32426CB9F0073599D /* ContentView.swift */; };
 		444C59F62426CBA40073599D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444C59F52426CBA40073599D /* Assets.xcassets */; };
 		444C59F92426CBA40073599D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444C59F82426CBA40073599D /* Preview Assets.xcassets */; };
 		444C59FC2426CBA40073599D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444C59FA2426CBA40073599D /* LaunchScreen.storyboard */; };
+		444C5A04242805060073599D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C5A03242805060073599D /* AppDelegate.swift */; };
+		44CF4B9E242FFD8500FD41AC /* BluetoothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CF4B9D242FFD8500FD41AC /* BluetoothController.swift */; };
+		C92F129E553C2EC1F32975BC /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F16DB48E411D23658B5B9 /* AppReducer.swift */; };
+		C92F1854F2826A89B3568430 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F1FC402F1CF27C49BA2C0 /* AppState.swift */; };
+		C92F1EEC5642E9FAE3FA4556 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F18445AE23590D27EE8DF /* AppAction.swift */; };
+		C92F1F8D8BA43D9453C11B70 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F136ACFF66193EEE30F78 /* Store.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44127810243A97F60042CCE7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		444C59EC2426CB9F0073599D /* BLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		444C59EF2426CB9F0073599D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		444C59F12426CB9F0073599D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		444C59F32426CB9F0073599D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		444C59F52426CBA40073599D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		444C59F82426CBA40073599D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		444C59FB2426CBA40073599D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		444C59FD2426CBA40073599D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		444C5A03242805060073599D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		44CF4B9A242FC15B00FD41AC /* BLE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BLE.entitlements; sourceTree = "<group>"; };
+		44CF4B9D242FFD8500FD41AC /* BluetoothController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothController.swift; sourceTree = "<group>"; };
+		C92F136ACFF66193EEE30F78 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		C92F16DB48E411D23658B5B9 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		C92F18445AE23590D27EE8DF /* AppAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
+		C92F1FC402F1CF27C49BA2C0 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +55,7 @@
 			children = (
 				444C59EE2426CB9F0073599D /* BLE */,
 				444C59ED2426CB9F0073599D /* Products */,
+				C92F1D900D832DE2D2A363B3 /* flux */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,9 +70,9 @@
 		444C59EE2426CB9F0073599D /* BLE */ = {
 			isa = PBXGroup;
 			children = (
-				444C59EF2426CB9F0073599D /* AppDelegate.swift */,
-				444C59F12426CB9F0073599D /* SceneDelegate.swift */,
-				444C59F32426CB9F0073599D /* ContentView.swift */,
+				44CF4B9B242FC4E400FD41AC /* launch */,
+				44CF4B9C242FC52100FD41AC /* views */,
+				44CF4B9A242FC15B00FD41AC /* BLE.entitlements */,
 				444C59F52426CBA40073599D /* Assets.xcassets */,
 				444C59FA2426CBA40073599D /* LaunchScreen.storyboard */,
 				444C59FD2426CBA40073599D /* Info.plist */,
@@ -73,6 +87,68 @@
 				444C59F82426CBA40073599D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		44CF4B9B242FC4E400FD41AC /* launch */ = {
+			isa = PBXGroup;
+			children = (
+				444C59F12426CB9F0073599D /* SceneDelegate.swift */,
+				444C5A03242805060073599D /* AppDelegate.swift */,
+				44CF4B9D242FFD8500FD41AC /* BluetoothController.swift */,
+			);
+			path = launch;
+			sourceTree = "<group>";
+		};
+		44CF4B9C242FC52100FD41AC /* views */ = {
+			isa = PBXGroup;
+			children = (
+				444C59F32426CB9F0073599D /* ContentView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		C92F13D1C335887BAE31FDDE /* models */ = {
+			isa = PBXGroup;
+			children = (
+				44127810243A97F60042CCE7 /* Item.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		C92F1857C5708D16C7478514 /* actions */ = {
+			isa = PBXGroup;
+			children = (
+				C92F18445AE23590D27EE8DF /* AppAction.swift */,
+			);
+			path = actions;
+			sourceTree = "<group>";
+		};
+		C92F1B107BB35F1099B11DA9 /* reducers */ = {
+			isa = PBXGroup;
+			children = (
+				C92F16DB48E411D23658B5B9 /* AppReducer.swift */,
+			);
+			path = reducers;
+			sourceTree = "<group>";
+		};
+		C92F1D900D832DE2D2A363B3 /* flux */ = {
+			isa = PBXGroup;
+			children = (
+				C92F1857C5708D16C7478514 /* actions */,
+				C92F1B107BB35F1099B11DA9 /* reducers */,
+				C92F1DF0F0AC255CD6B28B7E /* state */,
+				C92F13D1C335887BAE31FDDE /* models */,
+				C92F136ACFF66193EEE30F78 /* Store.swift */,
+			);
+			path = flux;
+			sourceTree = "<group>";
+		};
+		C92F1DF0F0AC255CD6B28B7E /* state */ = {
+			isa = PBXGroup;
+			children = (
+				C92F1FC402F1CF27C49BA2C0 /* AppState.swift */,
+			);
+			path = state;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,9 +222,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				444C59F02426CB9F0073599D /* AppDelegate.swift in Sources */,
+				444C5A04242805060073599D /* AppDelegate.swift in Sources */,
+				44127811243A97F60042CCE7 /* Item.swift in Sources */,
 				444C59F22426CB9F0073599D /* SceneDelegate.swift in Sources */,
+				44CF4B9E242FFD8500FD41AC /* BluetoothController.swift in Sources */,
 				444C59F42426CB9F0073599D /* ContentView.swift in Sources */,
+				C92F1854F2826A89B3568430 /* AppState.swift in Sources */,
+				C92F129E553C2EC1F32975BC /* AppReducer.swift in Sources */,
+				C92F1EEC5642E9FAE3FA4556 /* AppAction.swift in Sources */,
+				C92F1F8D8BA43D9453C11B70 /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BLE/BLE.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"BLE/Preview Content\"";
 				DEVELOPMENT_TEAM = A57W448PMQ;
@@ -304,6 +387,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BLE/BLE.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"BLE/Preview Content\"";
 				DEVELOPMENT_TEAM = A57W448PMQ;
