@@ -14,15 +14,11 @@ final class Store: ObservableObject {
         self.appReducer = appReducer
     }
 
-    public func dispatch(action: Action) {
+    public func dispatch(_ action: Action) {
         if let action = action as? AsyncAction {
-            action.execute(dispatch: self._dispatch)
+            action.execute(dispatch: self.dispatch)
         } else {
-            _dispatch(action: action)
+            appReducer(&self.state, action)
         }
-    }
-
-    private func _dispatch(action: Action) -> Void {
-        appReducer(&self.state, action)
     }
 }
