@@ -11,7 +11,6 @@
 		444C59F22426CB9F0073599D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C59F12426CB9F0073599D /* SceneDelegate.swift */; };
 		444C59F42426CB9F0073599D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C59F32426CB9F0073599D /* ContentView.swift */; };
 		444C59F62426CBA40073599D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444C59F52426CBA40073599D /* Assets.xcassets */; };
-		444C59F92426CBA40073599D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444C59F82426CBA40073599D /* Preview Assets.xcassets */; };
 		444C59FC2426CBA40073599D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444C59FA2426CBA40073599D /* LaunchScreen.storyboard */; };
 		444C5A04242805060073599D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C5A03242805060073599D /* AppDelegate.swift */; };
 		44D65723243FCE8B00FD292F /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D65722243FCE8B00FD292F /* Service.swift */; };
@@ -33,11 +32,10 @@
 
 /* Begin PBXFileReference section */
 		44127810243A97F60042CCE7 /* Peripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
-		444C59EC2426CB9F0073599D /* BLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		444C59EC2426CB9F0073599D /* SwiftUIBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		444C59F12426CB9F0073599D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		444C59F32426CB9F0073599D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		444C59F52426CBA40073599D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		444C59F82426CBA40073599D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		444C59FB2426CBA40073599D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		444C59FD2426CBA40073599D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		444C5A03242805060073599D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +79,7 @@
 		444C59ED2426CB9F0073599D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				444C59EC2426CB9F0073599D /* BLE.app */,
+				444C59EC2426CB9F0073599D /* SwiftUIBLE.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,21 +90,12 @@
 				44CF4B9B242FC4E400FD41AC /* launch */,
 				C92F1D900D832DE2D2A363B3 /* flux */,
 				44CF4B9C242FC52100FD41AC /* views */,
-				444C59F72426CBA40073599D /* Preview Content */,
 				44CF4B9A242FC15B00FD41AC /* BLE.entitlements */,
 				444C59F52426CBA40073599D /* Assets.xcassets */,
 				444C59FA2426CBA40073599D /* LaunchScreen.storyboard */,
 				444C59FD2426CBA40073599D /* Info.plist */,
 			);
 			path = BLE;
-			sourceTree = "<group>";
-		};
-		444C59F72426CBA40073599D /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				444C59F82426CBA40073599D /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		44CF4B9B242FC4E400FD41AC /* launch */ = {
@@ -208,7 +197,7 @@
 				44FC733124464ECE008823AD /* SwiftUIFlux */,
 			);
 			productName = BLE;
-			productReference = 444C59EC2426CB9F0073599D /* BLE.app */;
+			productReference = 444C59EC2426CB9F0073599D /* SwiftUIBLE.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -253,7 +242,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				444C59FC2426CBA40073599D /* LaunchScreen.storyboard in Resources */,
-				444C59F92426CBA40073599D /* Preview Assets.xcassets in Resources */,
 				444C59F62426CBA40073599D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,7 +408,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BLE/BLE.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"BLE/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = A57W448PMQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BLE/Info.plist;
@@ -428,8 +416,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = r.m.BLE;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = r.m.SwiftUIBLE;
+				PRODUCT_NAME = SwiftUIBLE;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -441,7 +429,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BLE/BLE.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"BLE/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = A57W448PMQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BLE/Info.plist;
@@ -449,8 +437,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = r.m.BLE;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = r.m.SwiftUIBLE;
+				PRODUCT_NAME = SwiftUIBLE;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
