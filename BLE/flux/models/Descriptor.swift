@@ -6,16 +6,11 @@ public protocol BTDescriptor {
 
     func readValue()
     func writeValue(data: Data)
-
-    func onUpdateValue()
-    func onWriteValue()
-    func onFailToUpdateValue(error: Error)
-    func onFailToWriteValue(error: Error)
 }
 
-class Descriptor: BTDescriptor {
+public struct Descriptor: BTDescriptor {
     private let cbDescriptor: CBDescriptor
-    let characteristic: BTCharacteristic
+    public let characteristic: BTCharacteristic
 
     init(_ cbDescriptor: CBDescriptor, characteristic: BTCharacteristic) {
         self.cbDescriptor = cbDescriptor
@@ -28,17 +23,5 @@ class Descriptor: BTDescriptor {
 
     public func writeValue(data: Data) {
         self.characteristic.service.peripheral.cbPeripheral.writeValue(data, for: self.cbDescriptor)
-    }
-
-    func onUpdateValue() {
-    }
-
-    func onWriteValue() {
-    }
-
-    func onFailToUpdateValue(error: Error) {
-    }
-
-    func onFailToWriteValue(error: Error) {
     }
 }

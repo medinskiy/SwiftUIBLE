@@ -1,14 +1,11 @@
-
 import CoreBluetooth
+import SwiftUIFlux
 
-public class CentralDelegate: NSObject, CBCentralManagerDelegate
-{
-    private let logger: Logger?
-    private let manager: Manager
+public class CentralDelegate: NSObject, CBCentralManagerDelegate {
+    private let dispatch: DispatchFunction
 
-    init(manager: Manager, logger: Logger?) {
-        self.manager = manager
-        self.logger = logger
+    init(dispatch: @escaping DispatchFunction) {
+        self.dispatch = dispatch
         super.init()
     }
 
@@ -17,32 +14,30 @@ public class CentralDelegate: NSObject, CBCentralManagerDelegate
     }
 
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        logger?.debug("centralManagerDidUpdateState \(central.state.rawValue)")
-        self.manager.onUpdateState(state: central.state)
+        self.dispatch(CentralAction.OnUpdateState(state: central.state))
+        if central.state != .poweredOn {
+            self.dispatch(AppAction.StopScan())
+        }
     }
 
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
-        self.manager.onDiscover(peripheral: peripheral, rssi: RSSI)
+        self.dispatch(CentralAction.OnDiscoverPeripheral(
+            peripheralId: peripheral.identifier.uuidString,
+            peripheral: peripheral,
+            rssi: RSSI,
+            delegate: PeripheralDelegate(dispatch: self.dispatch)
+        ))
     }
 
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        if let item = self.manager.getPeripheral(id: peripheral.hash) {
-            self.logger?.debug("Connect to peripheral \(peripheral.hash)")
-            item.onConnect()
-        }
+        self.dispatch(CentralAction.OnConnectPeripheral(peripheralId: peripheral.identifier.uuidString))
     }
 
     public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        if let item = self.manager.getPeripheral(id: peripheral.hash) {
-            self.logger?.debug("Fail connect to peripheral \(peripheral.hash)")
-            item.onFailToConnect(error: error)
-        }
+        self.dispatch(CentralAction.OnFailToConnect(peripheralId: peripheral.identifier.uuidString, error: error))
     }
 
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        if let item = self.manager.getPeripheral(id: peripheral.hash) {
-            self.logger?.debug("Disconnect from peripheral \(peripheral.hash)")
-            item.onDisconnect(error: error)
-        }
+        self.dispatch(CentralAction.OnDisconnect(peripheralId: peripheral.identifier.uuidString, error: error))
     }
 }

@@ -3,40 +3,36 @@ import CoreBluetooth
 
 public protocol BTService {
     var peripheral: BTPeripheral { get }
+    var name: String { get }
+    var isPrimary: Bool { get }
 
-    func getCharacteristic(id: Int) -> BTCharacteristic?
     func discoverCharacteristics()
-
-    func onDiscoverCharacteristic(characteristic: CBCharacteristic)
-    func onFailToDiscoverCharacteristic(error: Error)
 }
 
-class Service: BTService {
-
+public struct Service: BTService {
     private let cbService: CBService
-    let peripheral: BTPeripheral
-
-    private var characteristics: [Int: Characteristic] = [:]
+    public let peripheral: BTPeripheral
+    public var name: String {
+        self.titleForUUID(self.cbService.uuid)
+    }
+    public var isPrimary: Bool {
+        self.cbService.isPrimary
+    }
 
     init(_ cbService: CBService, peripheral: BTPeripheral) {
         self.cbService = cbService
         self.peripheral = peripheral
     }
 
-    public func getCharacteristic(id: Int) -> BTCharacteristic? {
-        return self.characteristics[id]
-    }
-
     public func discoverCharacteristics() {
         self.peripheral.cbPeripheral.discoverCharacteristics(nil, for: self.cbService)
     }
-
-    func onDiscoverCharacteristic(characteristic: CBCharacteristic) {
-        if self.characteristics.keys.contains(characteristic.hash) == false {
-            self.characteristics[characteristic.hash] = Characteristic(characteristic, service: self)
+    
+    private func titleForUUID(_ uuid:CBUUID) -> String {
+        var title = uuid.description
+        if (title.hasPrefix("Unknown")) {
+            title = uuid.uuidString
         }
-    }
-
-    func onFailToDiscoverCharacteristic(error: Error) {
+        return title
     }
 }

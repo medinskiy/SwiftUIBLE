@@ -1,55 +1,45 @@
-public protocol Action {
-}
-
-public protocol AsyncAction: Action {
-    func execute(dispatch: @escaping (_ action: Action) -> Void)
-}
+import CoreBluetooth
+import SwiftUIFlux
 
 struct AppAction {
 
-    struct Add: Action {
-        let id: Int
-        let item: BTPeripheral
+    struct Init: Action {
+        let btManager: BTManager
     }
 
-    struct ScanStatus: Action {
-        let status: Bool
+    struct StartScan: Action {
     }
 
-    struct SetActive: Action {
-        let item: BTPeripheral
+    struct StopScan: Action {
     }
 
-    struct Connect: AsyncAction {
-        let item: BTPeripheral
-
-        func execute(dispatch: @escaping (_ action: Action) -> Void) {
-            dispatch(AppAction.StopScan())
-            Manager.shared.connect(peripheral: item)
-        }
+    struct Connect: Action {
+        let peripheralId: String
     }
 
-    struct Disconnect: AsyncAction {
-        let item: BTPeripheral
-
-        func execute(dispatch: @escaping (_ action: Action) -> Void) {
-            Manager.shared.disconnect(peripheral: item)
-        }
+    struct Disconnect: Action {
+        let peripheralId: String
     }
 
-    struct StartScan: AsyncAction {
-        func execute(dispatch: @escaping (_ action: Action) -> Void) {
-            dispatch(AppAction.ScanStatus(status: true))
-            Manager.shared.startScan() { id, peripheral in
-                dispatch(AppAction.Add(id: id, item: peripheral))
-            }
-        }
+    struct DiscoverCharacteristics: Action {
+        let serviceId: String
     }
 
-    struct StopScan: AsyncAction {
-        func execute(dispatch: @escaping (_ action: Action) -> Void) {
-            Manager.shared.stopScan()
-            dispatch(AppAction.ScanStatus(status: false))
-        }
+    struct DiscoverDescriptors: Action {
+        let characteristicId: String
+    }
+    
+    struct WriteValue: Action {
+        let characteristicId: String
+        let value: String
+    }
+    
+    struct ReadValue: Action {
+        let characteristicId: String
+    }
+    
+    struct SetNotify: Action {
+        let characteristicId: String
+        let state: Bool
     }
 }

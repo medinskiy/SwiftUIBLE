@@ -3,26 +3,29 @@ import CoreBluetooth
 
 public protocol BTCharacteristic {
     var service: BTService { get }
+    var name: String { get }
+    var value: String { get }
+    var isNotifing: Bool { get }
+//    var properties:
 
     func readValue()
-    func writeValue(data: Data)
+    func writeValue(value: String)
     func setNotify(enabled: Bool)
-    func getDescriptor(id: Int) -> BTDescriptor?
     func discoverDescriptors()
-
-    func onDiscoverDescriptor(descriptor: CBDescriptor)
-    func onUpdateValue()
-    func onWriteValue()
-    func onFailToUpdateValue(error: Error)
-    func onFailToWriteValue(error: Error)
-    func onFailToDiscoverDescriptors(error: Error)
 }
 
-class Characteristic: BTCharacteristic {
+public struct Characteristic: BTCharacteristic {
     private let cbCharacteristic: CBCharacteristic
-    let service: BTService
-
-    private var descriptors: [Int: Descriptor] = [:]
+    public let service: BTService
+    public var name: String {
+        self.titleForUUID(self.cbCharacteristic.uuid)
+    }
+    public var value: String {
+        String(decoding: self.cbCharacteristic.value ?? Data(), as: UTF8.self)
+    }
+    public var isNotifing: Bool {
+        self.cbCharacteristic.properties.contains(.notify)
+    }
 
     init(_ cbCharacteristic: CBCharacteristic, service: BTService) {
         self.cbCharacteristic = cbCharacteristic
@@ -33,44 +36,29 @@ class Characteristic: BTCharacteristic {
         self.service.peripheral.cbPeripheral.readValue(for: self.cbCharacteristic)
     }
 
-    public func writeValue(data: Data) {
-        self.service.peripheral.cbPeripheral.writeValue(
-            data,
-            for: self.cbCharacteristic,
-            type: CBCharacteristicWriteType.withResponse
-        )
+    public func writeValue(value: String) {
+        if let data = value.data(using: .utf8) {
+            self.service.peripheral.cbPeripheral.writeValue(
+                data,
+                for: self.cbCharacteristic,
+                type: CBCharacteristicWriteType.withResponse
+            )
+        }
     }
-
+    
     public func setNotify(enabled: Bool) {
         self.service.peripheral.cbPeripheral.setNotifyValue(enabled, for: self.cbCharacteristic)
-    }
-
-    public func getDescriptor(id: Int) -> BTDescriptor? {
-        return self.descriptors[id]
     }
 
     public func discoverDescriptors() {
         self.service.peripheral.cbPeripheral.discoverDescriptors(for: self.cbCharacteristic)
     }
-
-    func onDiscoverDescriptor(descriptor: CBDescriptor) {
-        if self.descriptors.keys.contains(descriptor.hash) == false {
-            self.descriptors[descriptor.hash] = Descriptor(descriptor, characteristic: self)
+    
+    private func titleForUUID(_ uuid:CBUUID) -> String {
+        var title = uuid.description
+        if (title.hasPrefix("Unknown")) {
+            title = uuid.uuidString
         }
-    }
-
-    func onUpdateValue() {
-    }
-
-    func onWriteValue() {
-    }
-
-    func onFailToUpdateValue(error: Error) {
-    }
-
-    func onFailToWriteValue(error: Error) {
-    }
-
-    func onFailToDiscoverDescriptors(error: Error) {
+        return title
     }
 }
