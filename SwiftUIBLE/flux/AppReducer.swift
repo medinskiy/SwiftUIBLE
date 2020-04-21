@@ -29,6 +29,7 @@ func appStateReducer(state: AppState, action: Action) -> AppState {
         state.manager?.stopScan()
 
     case let action as AppAction.Connect:
+        state = state.cleared()
         if let item = state.peripherals[action.peripheralId] {
             state.manager?.connect(peripheral: item)
         }
@@ -37,7 +38,6 @@ func appStateReducer(state: AppState, action: Action) -> AppState {
         if let item = state.peripherals[action.peripheralId] {
             state.manager?.disconnect(peripheral: item)
         }
-        state = state.cleared()
 
     case let action as AppAction.DiscoverCharacteristics:
         if let service = state.services[action.serviceId] {
@@ -96,7 +96,7 @@ func appStateReducer(state: AppState, action: Action) -> AppState {
                 }
                 state.characteristicsList[action.serviceId]!.append(action.characteristicId)
             }
-            state.characteristics[action.characteristicId] = Characteristic(action.characteristic, service: service)
+            state.characteristics[action.characteristicId] = Characteristic.create(action.characteristic, service: service)
         }
 
     case let action as PeripheralAction.onDiscoverDescriptor:
@@ -112,12 +112,12 @@ func appStateReducer(state: AppState, action: Action) -> AppState {
 
     case let action as PeripheralAction.OnUpdateCharacteristicValue:
         if let characteristic = state.characteristics[action.characteristicId] {
-            print("##OnUpdateCharacteristicValue \(characteristic.name) \(characteristic.value)")
+            print("##OnUpdateCharacteristicValue \(characteristic.name) \(characteristic.valueUTF8) \(characteristic.valueInt)")
         }
         
     case let action as PeripheralAction.OnWriteCharacteristicValue:
         if let characteristic = state.characteristics[action.characteristicId] {
-            print("##OnWriteCharacteristicValue \(characteristic.name) \(characteristic.value)")
+            print("##OnWriteCharacteristicValue \(characteristic.name) \(characteristic.valueUTF8)  \(characteristic.valueInt)")
         }
         
     case let action as PeripheralAction.OnFailToDiscoverServices:

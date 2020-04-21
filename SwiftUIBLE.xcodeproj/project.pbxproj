@@ -39,21 +39,21 @@
 		444C59FB2426CBA40073599D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		444C59FD2426CBA40073599D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		444C5A03242805060073599D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		44CF4B9A242FC15B00FD41AC /* BLE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BLE.entitlements; sourceTree = "<group>"; };
 		44D65722243FCE8B00FD292F /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		44ED5D06244DB2A000229DBD /* CharacteristicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicView.swift; sourceTree = "<group>"; };
+		44ED5D08244DBC8B00229DBD /* BLE.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = BLE.entitlements; sourceTree = "<group>"; };
 		44FC73352446761A008823AD /* PeripheralAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralAction.swift; sourceTree = "<group>"; };
 		C92F127E92FEFD522CF57026 /* PeripheralView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralView.swift; sourceTree = "<group>"; };
 		C92F14B89B580DC510AEA493 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		C92F1578250005A559536951 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		C92F15AE4B9EA9291A34CFDA /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		C92F165059CDAE51DDE572C3 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
-		C92F179CD53738B34D4F60C3 /* Characteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Characteristic.swift; sourceTree = "<group>"; };
+		C92F179CD53738B34D4F60C3 /* Characteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Characteristic.swift; path = ../Characteristic.swift; sourceTree = "<group>"; };
 		C92F1A4D44C0B20096D7406D /* CentralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralDelegate.swift; sourceTree = "<group>"; };
 		C92F1BE83CB4AD68E8C3A32D /* PeripheralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralDelegate.swift; sourceTree = "<group>"; };
 		C92F1C86394BC10F16C2A5A9 /* AppAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		C92F1D23C442412D461E76AA /* CentralAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralAction.swift; sourceTree = "<group>"; };
-		C92F1E192B717248347C3219 /* Descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Descriptor.swift; sourceTree = "<group>"; };
+		C92F1E192B717248347C3219 /* Descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Descriptor.swift; path = ../Descriptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +71,7 @@
 		444C59E32426CB9F0073599D = {
 			isa = PBXGroup;
 			children = (
-				444C59EE2426CB9F0073599D /* BLE */,
+				444C59EE2426CB9F0073599D /* SwiftUIBLE */,
 				444C59ED2426CB9F0073599D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,18 +84,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		444C59EE2426CB9F0073599D /* BLE */ = {
+		444C59EE2426CB9F0073599D /* SwiftUIBLE */ = {
 			isa = PBXGroup;
 			children = (
 				44CF4B9B242FC4E400FD41AC /* launch */,
 				C92F1D900D832DE2D2A363B3 /* flux */,
 				44CF4B9C242FC52100FD41AC /* views */,
-				44CF4B9A242FC15B00FD41AC /* BLE.entitlements */,
 				444C59F52426CBA40073599D /* Assets.xcassets */,
+				44ED5D08244DBC8B00229DBD /* BLE.entitlements */,
 				444C59FA2426CBA40073599D /* LaunchScreen.storyboard */,
 				444C59FD2426CBA40073599D /* Info.plist */,
 			);
-			path = BLE;
+			path = SwiftUIBLE;
 			sourceTree = "<group>";
 		};
 		44CF4B9B242FC4E400FD41AC /* launch */ = {
@@ -117,6 +117,15 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		44ED5D0E244E08D100229DBD /* Characteristics */ = {
+			isa = PBXGroup;
+			children = (
+				C92F179CD53738B34D4F60C3 /* Characteristic.swift */,
+				C92F1E192B717248347C3219 /* Descriptor.swift */,
+			);
+			path = Characteristics;
+			sourceTree = "<group>";
+		};
 		44FC7333244653E6008823AD /* BT */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,10 +138,9 @@
 		C92F13D1C335887BAE31FDDE /* models */ = {
 			isa = PBXGroup;
 			children = (
+				44ED5D0E244E08D100229DBD /* Characteristics */,
 				44127810243A97F60042CCE7 /* Peripheral.swift */,
 				44D65722243FCE8B00FD292F /* Service.swift */,
-				C92F179CD53738B34D4F60C3 /* Characteristic.swift */,
-				C92F1E192B717248347C3219 /* Descriptor.swift */,
 				C92F14B89B580DC510AEA493 /* Manager.swift */,
 			);
 			path = models;
@@ -180,9 +188,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		444C59EB2426CB9F0073599D /* BLE */ = {
+		444C59EB2426CB9F0073599D /* SwiftUIBLE */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 444C5A002426CBA40073599D /* Build configuration list for PBXNativeTarget "BLE" */;
+			buildConfigurationList = 444C5A002426CBA40073599D /* Build configuration list for PBXNativeTarget "SwiftUIBLE" */;
 			buildPhases = (
 				444C59E82426CB9F0073599D /* Sources */,
 				444C59E92426CB9F0073599D /* Frameworks */,
@@ -192,7 +200,7 @@
 			);
 			dependencies = (
 			);
-			name = BLE;
+			name = SwiftUIBLE;
 			packageProductDependencies = (
 				44FC733124464ECE008823AD /* SwiftUIFlux */,
 			);
@@ -215,7 +223,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 444C59E72426CB9F0073599D /* Build configuration list for PBXProject "BLE" */;
+			buildConfigurationList = 444C59E72426CB9F0073599D /* Build configuration list for PBXProject "SwiftUIBLE" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -231,7 +239,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				444C59EB2426CB9F0073599D /* BLE */,
+				444C59EB2426CB9F0073599D /* SwiftUIBLE */,
 			);
 		};
 /* End PBXProject section */
@@ -320,6 +328,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -345,6 +354,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -380,6 +390,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -395,6 +406,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -406,18 +418,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BLE/BLE.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SwiftUIBLE/BLE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = A57W448PMQ;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BLE/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SwiftUIBLE/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = r.m.SwiftUIBLE;
 				PRODUCT_NAME = SwiftUIBLE;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -427,18 +441,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BLE/BLE.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SwiftUIBLE/BLE.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = A57W448PMQ;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BLE/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SwiftUIBLE/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = r.m.SwiftUIBLE;
 				PRODUCT_NAME = SwiftUIBLE;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -447,7 +463,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		444C59E72426CB9F0073599D /* Build configuration list for PBXProject "BLE" */ = {
+		444C59E72426CB9F0073599D /* Build configuration list for PBXProject "SwiftUIBLE" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				444C59FE2426CBA40073599D /* Debug */,
@@ -456,7 +472,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		444C5A002426CBA40073599D /* Build configuration list for PBXNativeTarget "BLE" */ = {
+		444C5A002426CBA40073599D /* Build configuration list for PBXNativeTarget "SwiftUIBLE" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				444C5A012426CBA40073599D /* Debug */,

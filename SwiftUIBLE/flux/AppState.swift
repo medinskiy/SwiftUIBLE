@@ -9,7 +9,7 @@ struct AppState: FluxState {
     var peripherals: [String: BTPeripheral] = [:]
     var peripheralsList: [String] = []
 
-    var services: [String: BTService] = [:]
+    var services: [String: Service] = [:]
     var servicesList: [String] = []
 
     var characteristics: [String: BTCharacteristic] = [:]
