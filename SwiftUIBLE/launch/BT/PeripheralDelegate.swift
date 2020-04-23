@@ -43,6 +43,12 @@ class PeripheralDelegate: NSObject, CBPeripheralDelegate {
             }
         }
     }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        if error == nil {
+            self.dispatch(PeripheralAction.OnUpdateNotificationState(characteristicId: characteristic.uuid.uuidString))
+        }
+    }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if error != nil {
@@ -51,9 +57,7 @@ class PeripheralDelegate: NSObject, CBPeripheralDelegate {
                 error: error!
             ))
         } else {
-            self.dispatch(PeripheralAction.OnUpdateCharacteristicValue(
-                characteristicId: characteristic.uuid.uuidString
-            ))
+            self.dispatch(PeripheralAction.OnUpdateCharacteristicValue(characteristicId: characteristic.uuid.uuidString))
         }
     }
 
@@ -64,9 +68,7 @@ class PeripheralDelegate: NSObject, CBPeripheralDelegate {
                 error: error!
             ))
         } else {
-            self.dispatch(PeripheralAction.OnWriteCharacteristicValue(
-                characteristicId: characteristic.uuid.uuidString
-            ))
+            self.dispatch(PeripheralAction.OnWriteCharacteristicValue(characteristicId: characteristic.uuid.uuidString))
         }
     }
 

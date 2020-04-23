@@ -6,6 +6,8 @@ struct AppState: FluxState {
     var btStatus: Bool = false
     var scanStatus: Bool = false
     
+    var notify: [String: Bool] = [:]
+    
     var peripherals: [String: BTPeripheral] = [:]
     var peripheralsList: [String] = []
 

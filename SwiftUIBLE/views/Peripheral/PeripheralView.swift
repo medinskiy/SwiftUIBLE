@@ -1,8 +1,3 @@
-//
-// Created by Ruslan on 07.04.2020.
-// Copyright (c) 2020 Ruslan. All rights reserved.
-//
-
 import SwiftUI
 import CoreBluetooth
 import SwiftUIFlux
@@ -16,7 +11,7 @@ struct PeripheralView: View {
         
         let content = Group {
             if store.state.servicesList.isEmpty {
-                Text("None Services").padding(.top)
+                Text("Load Services").padding(.top)
             } else {
                 Form {
                     ForEach(store.state.servicesList, id: \.self) { serviceId in
@@ -24,33 +19,38 @@ struct PeripheralView: View {
                     }
                 }
             }
-        }.frame(maxWidth: .infinity)
-        .navigationBarItems(
-            trailing: connectButton(peripheral.isConnected())
-        )
+        }
+        .frame(maxWidth: .infinity)
+        .onAppear(perform: self.dispatchConnect(self.peripheralId))
+        .onDisappear(perform: self.dispatchDisconnect(self.peripheralId))
         
         return NavigationView {
-            content.navigationBarTitle(Text(peripheral.name), displayMode: .inline)
-        }.onAppear(perform: { self.dispatchConnect(self.peripheralId) })
-        .onDisappear(perform: { self.dispatchDisconnect(self.peripheralId) })
+            content
+                .navigationBarItems(trailing: self.connectButton(self.peripheralId, peripheral.isConnected()))
+                .navigationBarTitle(Text(peripheral.name), displayMode: .inline)
+        }
     }
     
-    private func connectButton(_ isConnected: Bool) -> some View {
+    private func connectButton(_ peripheralId: String, _ isConnected: Bool) -> some View {
         let label = isConnected ? "Disonnect" : "Disonnected"
         let textLabel = Text(label).foregroundColor(isConnected ? .red : .gray)
         
         return Button(
-            action: { self.dispatchDisconnect(self.peripheralId) },
+            action: self.dispatchDisconnect(peripheralId),
             label: { textLabel.frame(height: 30) }
         ).disabled(!isConnected)
     }
     
-    private func dispatchConnect(_ peripheralId: String) {
-        self.store.dispatch(action: AppAction.Connect(peripheralId: peripheralId))
+    private func dispatchConnect(_ peripheralId: String) -> () -> Void {
+        return { () -> Void in
+            self.store.dispatch(action: AppAction.Connect(peripheralId: peripheralId))
+        }
     }
     
-    private func dispatchDisconnect(_ peripheralId: String) {
-        self.store.dispatch(action: AppAction.Disconnect(peripheralId: peripheralId))
+    private func dispatchDisconnect(_ peripheralId: String) -> () -> Void {
+        return { () -> Void in
+            self.store.dispatch(action: AppAction.Disconnect(peripheralId: peripheralId))
+        }
     }
 }
 
@@ -64,15 +64,20 @@ struct ServiceRow: View {
         
         return Section(header: Text(service?.name ?? ""), content: {
             ForEach(characteristicsList, id: \.self) { characteristicId in
-                characteristicRow(characteristicId: characteristicId)
+                CharacteristicRow(characteristicId: characteristicId)
             }
-        }).onAppear(perform: { self.store.dispatch(action: AppAction.DiscoverCharacteristics(serviceId: self.serviceId)) })
+        }).onAppear(perform: self.dispatchDiscover(self.serviceId))
+    }
+
+    private func dispatchDiscover(_ serviceId: String) -> () -> Void {
+        return { () -> Void in
+            self.store.dispatch(action: AppAction.DiscoverCharacteristics(serviceId: serviceId))
+        }
     }
 }
 
-struct characteristicRow: View {
+struct CharacteristicRow: View {
     @EnvironmentObject private var store: Store<AppState>
-    @State private var isNotify: Bool = false
     @State private var isCharacteristicPresented: Bool = false
     let characteristicId: String
     
@@ -80,26 +85,42 @@ struct characteristicRow: View {
         let characteristic = self.store.state.characteristics[characteristicId]
         
         return HStack {
-            VStack (alignment: .leading) {
-                if characteristic == nil {
-                    Text("None Characteristic")
-                } else {
+            if characteristic == nil {
+                Text("None Characteristic")
+            } else {
+                VStack (alignment: .leading) {
                     Text(characteristic!.name)
-                    if characteristic!.valueUTF8 != "" {
-                        Text(characteristic!.valueUTF8).font(.system(size: 10))
+                    if characteristic!.value != "" {
+                        Text(characteristic!.value).font(.system(size: 10))
                     }
+                }.onTapGesture(perform: self.presentedToggle(characteristic))
+                Spacer()
+                if characteristic!.isNotifying && characteristic!.isReading {
+                    Toggle("Notify", isOn: Binding(
+                        get: { characteristic!.notificationState },
+                        set: { value in self.dispatchNotify(self.characteristicId, value) }
+                    )).labelsHidden().disabled(!characteristic!.service.peripheral.isConnected())
                 }
-            }.onTapGesture(perform: {  if characteristic?.isDetail ?? false { self.isCharacteristicPresented.toggle() } })
-            Spacer()
-            if characteristic != nil && characteristic!.isNotifing && characteristic!.isReaging {
-                Toggle("", isOn: Binding(get: {
-                    self.isNotify
-                }, set: { value in
-                    self.isNotify = value
-                    self.store.dispatch(action: AppAction.SetNotify(characteristicId: self.characteristicId, state: value))
-                })).labelsHidden()
             }
-        }.onAppear(perform: { self.store.dispatch(action: AppAction.ReadValue(characteristicId: self.characteristicId)) })
-        .sheet(isPresented: $isCharacteristicPresented, content: { CharacteristicView() })
+        }.sheet(isPresented: $isCharacteristicPresented, content: {
+            CharacteristicView(characteristicId: self.characteristicId).environmentObject(self.store)
+        }).onAppear(perform: self.dispatchRead(self.characteristicId))
+    }
+
+    private func presentedToggle(_ characteristic: BTCharacteristic?) -> () -> Void {
+        if characteristic?.isWriting ?? false {
+            return {() -> Void in self.isCharacteristicPresented.toggle() }
+        }
+        return { () -> Void in }
+    }
+
+    private func dispatchRead(_ characteristicId: String) -> () -> Void {
+        return { () -> Void in
+            self.store.dispatch(action: AppAction.ReadValue(characteristicId: characteristicId))
+        }
+    }
+    
+    private func dispatchNotify(_ characteristicId: String, _ state: Bool) {
+        self.store.dispatch(action: AppAction.SetNotify(characteristicId: characteristicId, state: state))
     }
 }

@@ -38,6 +38,10 @@ struct AppAction {
         let characteristicId: String
     }
     
+    struct ReadDescriptorValue: Action {
+        let descriptorId: String
+    }
+    
     struct SetNotify: Action {
         let characteristicId: String
         let state: Bool

@@ -1,21 +1,15 @@
 import SwiftUI
 import CoreBluetooth
 
-public enum CharacteristicType: String {
-    case battery = "0x180F"
-    case deviceInformation = "0x180A"
-    case any = "0x0"
-}
-
 public protocol BTCharacteristic {
     var service: BTService { get }
+    var uuid: CBUUID { get }
     var name: String { get }
-    var valueUTF8: String { get }
-    var valueInt: Int { get }
-    var isNotifing: Bool { get }
-    var isReaging: Bool { get }
+    var value: String { get }
+    var notificationState: Bool { get }
+    var isNotifying: Bool { get }
+    var isReading: Bool { get }
     var isWriting: Bool { get }
-    var isDetail: Bool { get }
 
     func readValue()
     func writeValue(value: String)
@@ -23,36 +17,30 @@ public protocol BTCharacteristic {
     func discoverDescriptors()
 }
 
-public class Characteristic: BTCharacteristic {
+public struct Characteristic: BTCharacteristic {
     public var service: BTService
-    internal let cbCharacteristic: CBCharacteristic
-    
-    public var name: String { self.titleForUUID(self.cbCharacteristic.uuid) }
-    public var valueUTF8: String { String(decoding: self.cbCharacteristic.value ?? Data(), as: UTF8.self) }
-    public var valueInt: Int { Int(self.cbCharacteristic.value?.hexString ?? "", radix: 16) ?? 0 }
-    public var isNotifing: Bool { self.cbCharacteristic.properties.contains(.notify) }
-    public var isReaging: Bool { self.cbCharacteristic.properties.contains(.read) }
-    public var isWriting: Bool { self.cbCharacteristic.properties.contains(.write) }
-    public var isDetail: Bool { true }
+    private let cbCharacteristic: CBCharacteristic
+    private let valueParser: CharacteristicValue
 
-    internal required init(_ cbCharacteristic: CBCharacteristic, service: BTService) {
+    public var uuid: CBUUID { self.cbCharacteristic.uuid }
+    public var name: String { self.titleForUUID(self.cbCharacteristic.uuid) }
+    public var value: String { self.valueParser.parse(data: self.cbCharacteristic.value ?? Data()) }
+    public var notificationState: Bool { self.cbCharacteristic.isNotifying }
+    public var isNotifying: Bool { self.cbCharacteristic.properties.contains(.notify) }
+    public var isReading: Bool { self.cbCharacteristic.properties.contains(.read) }
+    public var isWriting: Bool { self.cbCharacteristic.properties.contains(.write) }
+
+    init(_ cbCharacteristic: CBCharacteristic, service: BTService) {
         self.cbCharacteristic = cbCharacteristic
         self.service = service
-    }
-    
-    public static func create(_ cbCharacteristic: CBCharacteristic, service: BTService) -> BTCharacteristic {
-        if let type = CharacteristicType(rawValue: "0x\(cbCharacteristic.uuid.uuidString)") {
-            switch type {
-            case .battery, .deviceInformation, .any:
-                return self.init(cbCharacteristic, service: service)
-            }
-        }
-        
-        return self.init(cbCharacteristic, service: service)
+        self.valueParser = ValueParser.getParser(
+            serviceUUID: service.uuid.uuidString,
+            characteristicUUID: cbCharacteristic.uuid.uuidString
+        )
     }
 
     public func readValue() {
-        if self.isReaging {
+        if self.isReading {
             self.service.peripheral.cbPeripheral.readValue(for: self.cbCharacteristic)
         }
     }
@@ -66,9 +54,9 @@ public class Characteristic: BTCharacteristic {
             )
         }
     }
-    
+
     public func setNotify(enabled: Bool) {
-        if self.isNotifing {
+        if self.isNotifying {
             self.service.peripheral.cbPeripheral.setNotifyValue(enabled, for: self.cbCharacteristic)
         }
     }
@@ -76,7 +64,7 @@ public class Characteristic: BTCharacteristic {
     public func discoverDescriptors() {
         self.service.peripheral.cbPeripheral.discoverDescriptors(for: self.cbCharacteristic)
     }
-    
+
     private func titleForUUID(_ uuid:CBUUID) -> String {
         var title = uuid.description
         if (title.hasPrefix("Unknown")) {

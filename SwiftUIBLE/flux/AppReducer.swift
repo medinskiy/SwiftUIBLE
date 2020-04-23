@@ -64,6 +64,11 @@ func appStateReducer(state: AppState, action: Action) -> AppState {
             characteristic.setNotify(enabled: action.state)
         }
         
+    case let action as AppAction.ReadDescriptorValue:
+        if let descriptor = state.descriptors[action.descriptorId] {
+            descriptor.readValue()
+        }
+        
 
     case let action as CentralAction.OnUpdateState:
         state.btStatus = action.state == CBManagerState.poweredOn
@@ -96,7 +101,7 @@ func appStateReducer(state: AppState, action: Action) -> AppState {
                 }
                 state.characteristicsList[action.serviceId]!.append(action.characteristicId)
             }
-            state.characteristics[action.characteristicId] = Characteristic.create(action.characteristic, service: service)
+            state.characteristics[action.characteristicId] = Characteristic(action.characteristic, service: service)
         }
 
     case let action as PeripheralAction.onDiscoverDescriptor:
@@ -109,15 +114,10 @@ func appStateReducer(state: AppState, action: Action) -> AppState {
             }
             state.descriptors[action.descriptorId] = Descriptor(action.descriptor, characteristic: characteristic)
         }
-
-    case let action as PeripheralAction.OnUpdateCharacteristicValue:
-        if let characteristic = state.characteristics[action.characteristicId] {
-            print("##OnUpdateCharacteristicValue \(characteristic.name) \(characteristic.valueUTF8) \(characteristic.valueInt)")
-        }
         
     case let action as PeripheralAction.OnWriteCharacteristicValue:
         if let characteristic = state.characteristics[action.characteristicId] {
-            print("##OnWriteCharacteristicValue \(characteristic.name) \(characteristic.valueUTF8)  \(characteristic.valueInt)")
+            print("##OnWriteCharacteristicValue \(characteristic.name) \(characteristic.value)")
         }
         
     case let action as PeripheralAction.OnFailToDiscoverServices:

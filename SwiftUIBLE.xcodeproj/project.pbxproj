@@ -13,9 +13,10 @@
 		444C59F62426CBA40073599D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444C59F52426CBA40073599D /* Assets.xcassets */; };
 		444C59FC2426CBA40073599D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 444C59FA2426CBA40073599D /* LaunchScreen.storyboard */; };
 		444C5A04242805060073599D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C5A03242805060073599D /* AppDelegate.swift */; };
+		44D48D71244F94BB006A8B38 /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 44FC733124464ECE008823AD /* SwiftUIFlux */; };
+		44D48D7A2450F40D006A8B38 /* CharacteristicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D48D792450F40D006A8B38 /* CharacteristicValue.swift */; };
 		44D65723243FCE8B00FD292F /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D65722243FCE8B00FD292F /* Service.swift */; };
 		44ED5D07244DB2A000229DBD /* CharacteristicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED5D06244DB2A000229DBD /* CharacteristicView.swift */; };
-		44FC733424466E92008823AD /* SwiftUIFlux in Frameworks */ = {isa = PBXBuildFile; productRef = 44FC733124464ECE008823AD /* SwiftUIFlux */; };
 		44FC73362446761A008823AD /* PeripheralAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FC73352446761A008823AD /* PeripheralAction.swift */; };
 		C92F12BD41B213E01495A500 /* CentralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F1A4D44C0B20096D7406D /* CentralDelegate.swift */; };
 		C92F14859828DC2ED2E3BFA5 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92F1C86394BC10F16C2A5A9 /* AppAction.swift */; };
@@ -39,6 +40,7 @@
 		444C59FB2426CBA40073599D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		444C59FD2426CBA40073599D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		444C5A03242805060073599D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		44D48D792450F40D006A8B38 /* CharacteristicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicValue.swift; sourceTree = "<group>"; };
 		44D65722243FCE8B00FD292F /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		44ED5D06244DB2A000229DBD /* CharacteristicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicView.swift; sourceTree = "<group>"; };
 		44ED5D08244DBC8B00229DBD /* BLE.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = BLE.entitlements; sourceTree = "<group>"; };
@@ -48,12 +50,12 @@
 		C92F1578250005A559536951 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		C92F15AE4B9EA9291A34CFDA /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		C92F165059CDAE51DDE572C3 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
-		C92F179CD53738B34D4F60C3 /* Characteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Characteristic.swift; path = ../Characteristic.swift; sourceTree = "<group>"; };
+		C92F179CD53738B34D4F60C3 /* Characteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Characteristic.swift; sourceTree = "<group>"; };
 		C92F1A4D44C0B20096D7406D /* CentralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralDelegate.swift; sourceTree = "<group>"; };
 		C92F1BE83CB4AD68E8C3A32D /* PeripheralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralDelegate.swift; sourceTree = "<group>"; };
 		C92F1C86394BC10F16C2A5A9 /* AppAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		C92F1D23C442412D461E76AA /* CentralAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralAction.swift; sourceTree = "<group>"; };
-		C92F1E192B717248347C3219 /* Descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Descriptor.swift; path = ../Descriptor.swift; sourceTree = "<group>"; };
+		C92F1E192B717248347C3219 /* Descriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Descriptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44FC733424466E92008823AD /* SwiftUIFlux in Frameworks */,
+				44D48D71244F94BB006A8B38 /* SwiftUIFlux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,15 +119,6 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		44ED5D0E244E08D100229DBD /* Characteristics */ = {
-			isa = PBXGroup;
-			children = (
-				C92F179CD53738B34D4F60C3 /* Characteristic.swift */,
-				C92F1E192B717248347C3219 /* Descriptor.swift */,
-			);
-			path = Characteristics;
-			sourceTree = "<group>";
-		};
 		44FC7333244653E6008823AD /* BT */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,10 +131,12 @@
 		C92F13D1C335887BAE31FDDE /* models */ = {
 			isa = PBXGroup;
 			children = (
-				44ED5D0E244E08D100229DBD /* Characteristics */,
+				C92F14B89B580DC510AEA493 /* Manager.swift */,
 				44127810243A97F60042CCE7 /* Peripheral.swift */,
 				44D65722243FCE8B00FD292F /* Service.swift */,
-				C92F14B89B580DC510AEA493 /* Manager.swift */,
+				C92F179CD53738B34D4F60C3 /* Characteristic.swift */,
+				44D48D792450F40D006A8B38 /* CharacteristicValue.swift */,
+				C92F1E192B717248347C3219 /* Descriptor.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -278,6 +273,7 @@
 				C92F14859828DC2ED2E3BFA5 /* AppAction.swift in Sources */,
 				C92F1B3242DCA10E6418690F /* CentralAction.swift in Sources */,
 				C92F1CD6760C1F4788F12A18 /* Manager.swift in Sources */,
+				44D48D7A2450F40D006A8B38 /* CharacteristicValue.swift in Sources */,
 				44FC73362446761A008823AD /* PeripheralAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,12 +10,12 @@ struct ContentView: View {
             NavigationLink(destination: PeripheralView(peripheralId: itemId)) {
                 Text("\(self.store.state.peripherals[itemId]!.name) (\(self.store.state.peripherals[itemId]!.rssi)dB)")
             }
-        }.navigationBarItems(
-            trailing: scanButton(self.store.state.btStatus, self.store.state.scanStatus)
-        )
+        }
 
         return NavigationView {
-            content.navigationBarTitle("Peripheral", displayMode: .inline)
+            content
+                .navigationBarItems(trailing: scanButton(self.store.state.btStatus, self.store.state.scanStatus))
+                .navigationBarTitle("Peripheral", displayMode: .inline)
         }.onAppear(perform: dispatchInit);
     }
     

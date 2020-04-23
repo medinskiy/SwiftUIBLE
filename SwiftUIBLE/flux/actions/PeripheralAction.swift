@@ -23,6 +23,10 @@ struct PeripheralAction {
         let characteristicId: String
         let characteristic: CBCharacteristic
     }
+    
+    struct OnUpdateNotificationState: Action {
+        let characteristicId: String
+    }
 
     struct OnFailToUpdateCharacteristicValue: Action {
         let characteristicId: String
