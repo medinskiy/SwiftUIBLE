@@ -58,7 +58,8 @@ private struct NumberValue: CharacteristicValue {
 
 private struct StringValue: CharacteristicValue {
     public func parse(data: Data) -> String {
-        String(decoding: data, as: UTF8.self)
+        let string = String(decoding: data, as: UTF8.self)
+        return string.isEmpty ? "" : string.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 

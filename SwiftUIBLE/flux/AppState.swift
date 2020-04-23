@@ -6,8 +6,7 @@ struct AppState: FluxState {
     var manager: BTManager?
     var btStatus: Bool = false
     var scanStatus: Bool = false
-    
-    var notify: [String: Bool] = [:]
+    var values: [String: [(Date, String)]] = [:]
     
     var peripherals: [String: BTPeripheral] = [:]
     var peripheralsList: [String] = []
@@ -29,6 +28,7 @@ struct AppState: FluxState {
         state.characteristics.removeAll()
         state.servicesList.removeAll()
         state.services.removeAll()
+        state.values.removeAll()
         
         return state
     }

@@ -104,6 +104,12 @@ func appStateReducer(state: AppState, action: Action) -> AppState {
             }
             state.descriptors[action.descriptorId] = Descriptor(action.descriptor, characteristic: characteristic)
         }
+    
+    case let action as PeripheralAction.OnUpdateCharacteristicValue:
+        if let characteristic = state.characteristics[action.characteristicId], characteristic.value != "" {
+            let value = (Date(), characteristic.value)
+            state.values[action.characteristicId, default: []].insert(value, at: 0)
+        }
         
     case let action as PeripheralAction.OnWriteCharacteristicValue:
         if let characteristic = state.characteristics[action.characteristicId] {

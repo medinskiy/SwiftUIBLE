@@ -43,6 +43,7 @@ struct PeripheralView: View {
     
     private func dispatchConnect(_ peripheralId: String) -> () -> Void {
         return { () -> Void in
+            self.store.dispatch(action: AppAction.StopScan())
             self.store.dispatch(action: AppAction.Connect(peripheralId: peripheralId))
         }
     }
@@ -102,13 +103,6 @@ private struct CharacteristicRow: View {
         }.sheet(isPresented: $isCharacteristicPresented, content: {
             CharacteristicView(characteristicId: self.characteristicId).environmentObject(self.store)
         }).onAppear(perform: self.dispatchRead(self.characteristicId))
-    }
-
-    private func presentedToggle(_ characteristic: BTCharacteristic?) -> () -> Void {
-        if characteristic?.isWriting ?? false {
-            return {() -> Void in self.isCharacteristicPresented.toggle() }
-        }
-        return { () -> Void in }
     }
 
     private func dispatchRead(_ characteristicId: String) -> () -> Void {

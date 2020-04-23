@@ -16,7 +16,7 @@ struct ContentView: View {
             content
                 .navigationBarTitle("Peripheral", displayMode: .inline)
                 .navigationBarItems(trailing: self.scanButton(self.store.state.btStatus, self.store.state.scanStatus))
-        }.onAppear(perform: dispatchInit);
+            }.onAppear(perform: dispatchInit)
     }
     
     private func scanButton(_ btStatus: Bool, _ scanStatus: Bool) -> some View {
