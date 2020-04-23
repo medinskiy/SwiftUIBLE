@@ -10,20 +10,13 @@ func appStateReducer(state: AppState, action: Action) -> AppState {
     case let action as AppAction.Init:
         state.manager = action.btManager
 
-    case let action as AppAction.StartScan:
+    case _ as AppAction.StartScan:
         state.scanStatus = true
         state.manager?.startScan()
-        state.stopTimer = action.stopTimer
-        if action.stopTimer != nil {
-            RunLoop.current.add(action.stopTimer!, forMode: .common)
-        }
 
     case _ as AppAction.StopScan:
         state.scanStatus = false
         state.manager?.stopScan()
-        if state.stopTimer != nil && state.stopTimer!.isValid {
-            state.stopTimer!.invalidate()
-        }
 
     case let action as AppAction.Connect:
         state = state.cleared()

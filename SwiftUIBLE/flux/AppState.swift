@@ -2,8 +2,7 @@ import SwiftUI
 import SwiftUIFlux
 
 struct AppState: FluxState {
-    
-    var stopTimer: Timer?
+
     var manager: BTManager?
     var btStatus: Bool = false
     var scanStatus: Bool = false

@@ -7,12 +7,9 @@ struct AppAction {
         let btManager: BTManager
     }
 
-    struct StartScan: Action {
-        let stopTimer: Timer?
-    }
+    struct StartScan: Action {}
 
-    struct StopScan: Action {
-    }
+    struct StopScan: Action {}
 
     struct Connect: Action {
         let peripheralId: String

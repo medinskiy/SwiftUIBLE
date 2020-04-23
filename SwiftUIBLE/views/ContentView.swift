@@ -35,10 +35,12 @@ struct ContentView: View {
     }
     
     private func dispatchStartScan() {
-        let action = AppAction.StartScan(
-            stopTimer: Timer(timeInterval: 5.0, repeats: false, block: { _ in self.dispatchStopScan() })
-        )
-        self.store.dispatch(action: action)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if self.store.state.scanStatus {
+                self.dispatchStopScan()
+            }
+        }
+        self.store.dispatch(action: AppAction.StartScan())
     }
     
     private func dispatchStopScan() {
