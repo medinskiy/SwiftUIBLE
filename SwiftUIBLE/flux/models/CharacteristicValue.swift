@@ -13,6 +13,16 @@ private enum CharacteristicType: String {
     case any = "0x0"
 }
 
+extension Data {
+    var hexString: String {
+        var hex:String = ""
+        for byte in self {
+            hex += String(format: "%02X", byte)
+        }
+        return hex
+    }
+}
+
 private let parsers: [ServiceType: [CharacteristicType: CharacteristicValue]] = [
     ServiceType.battery: [
         CharacteristicType.any: BatteryValue(),

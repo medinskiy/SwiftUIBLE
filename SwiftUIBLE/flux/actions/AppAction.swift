@@ -8,6 +8,7 @@ struct AppAction {
     }
 
     struct StartScan: Action {
+        let stopTimer: Timer?
     }
 
     struct StopScan: Action {

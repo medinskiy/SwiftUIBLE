@@ -113,8 +113,9 @@
 		44CF4B9C242FC52100FD41AC /* views */ = {
 			isa = PBXGroup;
 			children = (
-				C92F1D49A2E69A1F55D7C92E /* Peripheral */,
 				444C59F32426CB9F0073599D /* ContentView.swift */,
+				C92F127E92FEFD522CF57026 /* PeripheralView.swift */,
+				44ED5D06244DB2A000229DBD /* CharacteristicView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -157,15 +158,6 @@
 				44FC73352446761A008823AD /* PeripheralAction.swift */,
 			);
 			path = actions;
-			sourceTree = "<group>";
-		};
-		C92F1D49A2E69A1F55D7C92E /* Peripheral */ = {
-			isa = PBXGroup;
-			children = (
-				C92F127E92FEFD522CF57026 /* PeripheralView.swift */,
-				44ED5D06244DB2A000229DBD /* CharacteristicView.swift */,
-			);
-			path = Peripheral;
 			sourceTree = "<group>";
 		};
 		C92F1D900D832DE2D2A363B3 /* flux */ = {

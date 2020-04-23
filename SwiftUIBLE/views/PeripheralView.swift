@@ -26,8 +26,8 @@ struct PeripheralView: View {
         
         return NavigationView {
             content
-                .navigationBarItems(trailing: self.connectButton(self.peripheralId, peripheral.isConnected()))
                 .navigationBarTitle(Text(peripheral.name), displayMode: .inline)
+                .navigationBarItems(trailing: self.connectButton(self.peripheralId, peripheral.isConnected()))
         }
     }
     
@@ -54,7 +54,7 @@ struct PeripheralView: View {
     }
 }
 
-struct ServiceRow: View {
+private struct ServiceRow: View {
     @EnvironmentObject private var store: Store<AppState>
     let serviceId: String
     
@@ -62,7 +62,7 @@ struct ServiceRow: View {
         let service = self.store.state.services[serviceId]
         let characteristicsList = self.store.state.characteristicsList[serviceId] ?? []
         
-        return Section(header: Text(service?.name ?? ""), content: {
+        return Section(header: Text(service?.name ?? "Unknown Service"), content: {
             ForEach(characteristicsList, id: \.self) { characteristicId in
                 CharacteristicRow(characteristicId: characteristicId)
             }
@@ -76,7 +76,7 @@ struct ServiceRow: View {
     }
 }
 
-struct CharacteristicRow: View {
+private struct CharacteristicRow: View {
     @EnvironmentObject private var store: Store<AppState>
     @State private var isCharacteristicPresented: Bool = false
     let characteristicId: String
@@ -93,13 +93,10 @@ struct CharacteristicRow: View {
                     if characteristic!.value != "" {
                         Text(characteristic!.value).font(.system(size: 10))
                     }
-                }.onTapGesture(perform: self.presentedToggle(characteristic))
+                }.onTapGesture(perform: { self.isCharacteristicPresented.toggle() })
                 Spacer()
                 if characteristic!.isNotifying && characteristic!.isReading {
-                    Toggle("Notify", isOn: Binding(
-                        get: { characteristic!.notificationState },
-                        set: { value in self.dispatchNotify(self.characteristicId, value) }
-                    )).labelsHidden().disabled(!characteristic!.service.peripheral.isConnected())
+                    NotifyToggle(characteristicId: characteristicId).labelsHidden()
                 }
             }
         }.sheet(isPresented: $isCharacteristicPresented, content: {
@@ -124,3 +121,4 @@ struct CharacteristicRow: View {
         self.store.dispatch(action: AppAction.SetNotify(characteristicId: characteristicId, state: state))
     }
 }
+
