@@ -1,2 +1,2 @@
 # SwiftUIBLE
-Bluetooth Low Energy Flux+SwiftUi Scanner
+Bluetooth Low Energy Flux+SwiftUi Scanner like for LightBlue
